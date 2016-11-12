@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.user.pontoon">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".Main"
+            android:label="Pontoon">
+            <intent-filter>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Pontoon"
+            android:label="Pontoon">
+        </activity>
+
+        <activity
+            android:name=".PontoonRules"
+            android:label="Pontoon">
+        </activity>
+
+    </application>
+
+</manifest>
