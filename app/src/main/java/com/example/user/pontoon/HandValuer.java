@@ -5,4 +5,7 @@ package com.example.user.pontoon;
  */
 
 public interface HandValuer {
+
+    int getHandValue(Hand hand);
+
 }

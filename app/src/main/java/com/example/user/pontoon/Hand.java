@@ -5,4 +5,5 @@ package com.example.user.pontoon;
  */
 
 public class Hand extends SetOfCards {
+
 }

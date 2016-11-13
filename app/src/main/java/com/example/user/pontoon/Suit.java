@@ -5,4 +5,8 @@ package com.example.user.pontoon;
  */
 
 public enum Suit {
+    HEARTS,
+    DIAMONDS,
+    SPADES,
+    CLUBS
 }
