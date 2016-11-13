@@ -12,17 +12,21 @@
             android:name=".Main"
             android:label="Pontoon">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".Pontoon"
-            android:label="Pontoon">
+            android:label="Pontoon"
+            android:parentActivityName=".Main">
         </activity>
 
         <activity
             android:name=".PontoonRules"
-            android:label="Pontoon">
+            android:label="Pontoon"
+            android:parentActivityName=".Main">
         </activity>
 
     </application>
