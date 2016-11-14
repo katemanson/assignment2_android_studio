@@ -69,6 +69,20 @@ public class PontoonGameTest {
     }
 
     @Test
+    public void canShowAppHandText() {
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        assertEquals("Dealer hand: \nKING of CLUBS\nACE of DIAMONDS", game.showAppHandText());
+    }
+
+    @Test
+    public void canShowUserHandText() {
+        game.getUserPlayer().getHand().addCard(sevenOfSpades);
+        game.getUserPlayer().getHand().addCard(twoOfHearts);
+        assertEquals("Your hand: \nSEVEN of SPADES\nTWO of HEARTS", game.showUserHandText());
+    }
+
+    @Test
     public void canCheckForAppPontoon_Pontoon() {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         game.getAppPlayer().getHand().addCard(aceOfDiamonds);

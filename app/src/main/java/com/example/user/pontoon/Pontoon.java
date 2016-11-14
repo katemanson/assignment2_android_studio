@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -47,6 +48,22 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Deal button clicked");
 
+                // to remove button on click
+                ViewGroup parentView = (ViewGroup) view.getParent();
+                parentView.removeView(view);
+
+                // ?is setUpNewDeck in the right place? Differs if starting game after a Pontoon...
+                mPontoonGame.setUpNewDeck();
+                mPontoonGame.deal(2);
+
+                mAppCards.setText(mPontoonGame.showAppHandText());
+                mUserCards.setText(mPontoonGame.showUserHandText());
+
+                mPontoonGame.checkInitialDeal();
+
+
+
+                //
             }
         });
 

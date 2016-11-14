@@ -69,6 +69,30 @@ public class PontoonGame {
         }
     }
 
+    public String showAppHandText() {
+        ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
+
+        StringBuffer appCardsText = new StringBuffer();
+        for ( Card card : appCards ) {
+            appCardsText.append("\n" + card.getRank() + " of " + card.getSuit());
+        }
+
+        String appHand = "Dealer hand: " + appCardsText;
+        return appHand;
+    }
+
+    public String showUserHandText() {
+        ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
+
+        StringBuffer userCardsText = new StringBuffer();
+        for ( Card card : userCards ) {
+            userCardsText.append("\n" + card.getRank() + " of " + card.getSuit());
+        }
+
+        String userHand = "Your hand: " + userCardsText;
+        return userHand;
+    }
+
     public boolean checkForAppPontoon() {
         Hand appHand = this.appPlayer.getHand();
         boolean pontoon = this.handValuer.checkForPontoon(appHand);
@@ -141,10 +165,6 @@ public class PontoonGame {
         Hand userHand = this.userPlayer.getHand();
         boolean fiveCardTrick = this.handValuer.checkForFiveCardTrick(userHand);
         return fiveCardTrick;
-    }
-
-    public void playInitialDeal() {
-        deal(2);
     }
 
     public String checkInitialDeal() {
