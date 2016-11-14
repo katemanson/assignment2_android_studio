@@ -17,11 +17,6 @@ public class Pontoon extends AppCompatActivity {
     Button mDealButton;
     TextView mAppCards;
     TextView mUserCards;
-    TextView mPrompts;
-    Button mTwistButton;
-    Button mStickButton;
-    Button mPlayAgainButton;
-    Button mQuitButton;
 
     PontoonGame mPontoonGame = new PontoonGame();
 
@@ -32,14 +27,9 @@ public class Pontoon extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pontoon);
 
-        mDealButton = (Button)findViewById(R.id.deal_button);
-        mAppCards = (TextView)findViewById(R.id.app_cards);
-        mUserCards = (TextView)findViewById(R.id.user_cards);
-        mPrompts = (TextView)findViewById(R.id.prompts);
-        mTwistButton = (Button)findViewById(R.id.twist_button);
-        mStickButton = (Button)findViewById(R.id.stick_button);
-        mPlayAgainButton = (Button)findViewById(R.id.play_again_button);
-        mQuitButton = (Button)findViewById(R.id.quit_button);
+        mDealButton = (Button) findViewById(R.id.deal_button);
+        mAppCards = (TextView) findViewById(R.id.app_cards);
+        mUserCards = (TextView) findViewById(R.id.user_cards);
 
         mDealButton.setOnClickListener(new View.OnClickListener() {
 
@@ -48,7 +38,7 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Deal button clicked");
 
-                // to remove button on click
+                // removes button on click
                 ViewGroup parentView = (ViewGroup) view.getParent();
                 parentView.removeView(view);
 
@@ -61,51 +51,7 @@ public class Pontoon extends AppCompatActivity {
 
                 mPontoonGame.checkInitialDeal();
 
-
-
-                //
-            }
-        });
-
-        mTwistButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Log.d("Pontoon", "Twist button clicked");
-
-            }
-        });
-
-        mStickButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Log.d("Pontoon", "Stick button clicked");
-
-            }
-        });
-
-        mPlayAgainButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Log.d("Pontoon", "Play again button clicked");
-
-            }
-        });
-
-        mQuitButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Log.d("Pontoon", "Quit button clicked");
-
             }
         });
     }
-
 }

@@ -10,85 +10,34 @@
         android:fontFamily="casual"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         />
 
     <TextView
         android:id="@+id/app_cards"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
+        android:text=""
+        android:textSize="25sp"
+        android:fontFamily="casual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         />
 
     <TextView
         android:id="@+id/user_cards"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-
-    <TextView
-        android:id="@+id/prompts"
+        android:text=""
+        android:textSize="25sp"
+        android:fontFamily="casual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
+        android:layout_below="@+id/app_cards"
         />
-
-    <Button
-        android:id="@+id/twist_button"
-        android:text="Twist"
-        android:textSize="40sp"
-        android:fontFamily="casual"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-
-    <Button
-        android:id="@+id/stick_button"
-        android:text="Stick"
-        android:textSize="40sp"
-        android:fontFamily="casual"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-
-    <Button
-        android:id="@+id/play_again_button"
-        android:text="Play"
-        android:textSize="40sp"
-        android:fontFamily="casual"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-
-    <Button
-        android:id="@+id/quit_button"
-        android:text="Quit"
-        android:textSize="40sp"
-        android:fontFamily="casual"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        />
-
 
 </RelativeLayout>
