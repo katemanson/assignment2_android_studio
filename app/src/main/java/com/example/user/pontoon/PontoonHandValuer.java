@@ -38,9 +38,28 @@ public class PontoonHandValuer implements HandValuer {
         return handValue;
     }
 
-    public boolean checkIfBust(Hand hand) {
+    public boolean checkIfMustTwist(Hand hand) {
+        int handSize = hand.countCards();
         int handValue = getHandValue(hand);
-        if (handValue > 21) {
+        if ( handSize < 5 && handValue < 15 ) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canStickOrTwist(Hand hand) {
+        int handSize = hand.countCards();
+        int handValue = getHandValue(hand);
+        if (handSize < 5 && (handValue >= 15 && handValue <= 21)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIfBust(Hand hand) {
+        int handSize = hand.countCards();
+        int handValue = getHandValue(hand);
+        if (handSize > 5 || handValue > 21) {
             return true;
         }
         return false;

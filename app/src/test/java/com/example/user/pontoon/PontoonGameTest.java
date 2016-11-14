@@ -235,7 +235,7 @@ public class PontoonGameTest {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(aceOfDiamonds);
         game.getUserPlayer().getHand().addCard(kingOfClubs);
-        assertEquals("You both have Pontoon. \nDealer wins.", game.checkInitialDeal());
+        assertEquals("You both have Pontoon. \nDealer wins this hand.", game.checkInitialDeal());
     }
 
     @Test
@@ -244,7 +244,7 @@ public class PontoonGameTest {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(sevenOfSpades);
-        assertEquals("You have 17. \nDealer has Pontoon. \nDealer wins.", game.checkInitialDeal());
+        assertEquals("You have 17. \nDealer has Pontoon. \nDealer wins this hand.", game.checkInitialDeal());
     }
 
     @Test
@@ -253,7 +253,7 @@ public class PontoonGameTest {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(aceOfDiamonds);
-        assertEquals("You have Pontoon. \nDealer has 16. \nYou win!", game.checkInitialDeal());
+        assertEquals("You have Pontoon. \nDealer has 16. \nYou win this hand!", game.checkInitialDeal());
     }
 
     @Test

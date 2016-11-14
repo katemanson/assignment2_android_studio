@@ -39,7 +39,6 @@ public class PontoonGame {
     public void setUpNewDeck() {
         this.deck.buildDeck();
         this.deck.shuffle();
-        this.deck.shuffle();
         this.deck.cut();
     }
 
@@ -167,6 +166,42 @@ public class PontoonGame {
         return fiveCardTrick;
     }
 
+    public boolean appHasToTwist() {
+        Hand appHand = this.appPlayer.getHand();
+        boolean hasToTwist = this.handValuer.checkIfMustTwist(appHand);
+        return hasToTwist;
+    }
+
+    public boolean userHasToTwist() {
+        Hand userHand = this.userPlayer.getHand();
+        boolean hasToTwist = this.handValuer.checkIfMustTwist(userHand);
+        return hasToTwist;
+    }
+
+    public boolean appStrategyTwist() {
+        int handSize = getAppHandSize();
+        int handValue = getAppHandValue();
+        if ( handSize < 5 && (handValue == 15 || handValue == 16) ) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean appStrategyStick() {
+        int handSize = getAppHandSize();
+        int handValue = getAppHandValue();
+        if ( handSize < 5 && (handValue >= 17 && handValue <= 21) ) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean userCanStickOrTwist() {
+        Hand userHand = this.userPlayer.getHand();
+        boolean canStickOrTwist = this.handValuer.canStickOrTwist(userHand);
+        return canStickOrTwist;
+    }
+
     public String checkInitialDeal() {
 
         int appValue = getAppHandValue();
@@ -174,9 +209,9 @@ public class PontoonGame {
         boolean appPontoon = checkForAppPontoon();
         boolean userPontoon = checkForUserPontoon();
 
-        String resultBothPontoon = "You both have Pontoon. \nDealer wins.";
-        String resultAppPontoon = "You have " + userValue + ". \nDealer has Pontoon. \nDealer wins.";
-        String resultUserPontoon = "You have Pontoon. \nDealer has " + appValue + ". \nYou win!";
+        String resultBothPontoon = "You both have Pontoon. \nDealer wins this hand.";
+        String resultAppPontoon = "You have " + userValue + ". \nDealer has Pontoon. \nDealer wins this hand.";
+        String resultUserPontoon = "You have Pontoon. \nDealer has " + appValue + ". \nYou win this hand!";
 
         if ( appPontoon && userPontoon ) {
             return resultBothPontoon;
@@ -192,35 +227,27 @@ public class PontoonGame {
 
     public String checkUserHand() {
 
-        int handSize = getUserHandSize();
-        int handValue = getUserHandValue();
-
         String haveToTwist = "Since your hand is worth less than 15, you have to twist.";
         String stickOrTwist = "Stick or twist?";
         String resultUserBust = "You're bust. \nDealer wins this hand.";
         String outcomeUserFCT = "You have a Five Card Trick! \nDealer's turn, now...";
 
-        if ( handSize < 5 && handValue < 15 ) {
+        if ( userHasToTwist() ) {
             return haveToTwist;
         }
-        else if ( handSize >= 5 ) {
-            if ( handValue > 21 ) {
-                return resultUserBust;
-            }
-            else if ( handValue <= 21 ) {
-                return outcomeUserFCT;
-            }
+        else if ( checkIfUserBust() ) {
+            return resultUserBust;
         }
-        else if ( handValue >= 15 && handValue <= 21 ) {
+        else if ( checkForUserFCT() ) {
+            return outcomeUserFCT;
+        }
+        else if ( userCanStickOrTwist() ) {
             return stickOrTwist;
         }
-        return resultUserBust;
+        return null;
     }
 
     public String checkAppHand() {
-
-        int handSize = getAppHandSize();
-        int handValue = getAppHandValue();
 
         String haveToTwist = "Since their hand is worth less than 15, Dealer must twist...";
         String resultAppBust = "Dealer is bust! \nYou win this hand.";
@@ -228,24 +255,22 @@ public class PontoonGame {
         String outcomeTwist = "Dealer twists...";
         String outcomeStick = "Dealer sticks...";
 
-        if ( handSize < 5 && handValue < 15 ) {
+        if ( appHasToTwist() ) {
             return haveToTwist;
         }
-        else if ( handSize >= 5 ) {
-            if ( handValue > 21 ) {
-                return resultAppBust;
-            }
-            else if ( handValue <= 21 ) {
-                return outcomeAppFCT;
-            }
+        else if ( checkIfAppBust() ) {
+            return resultAppBust;
         }
-        else if ( handValue == 15 || handValue == 16 ) {
+        else if ( checkForAppFCT() ) {
+            return outcomeAppFCT;
+        }
+        else if ( appStrategyTwist() ) {
             return outcomeTwist;
         }
-        else if ( handValue >= 17 && handValue <= 21 ) {
+        else if ( appStrategyStick() ) {
             return outcomeStick;
         }
-        return resultAppBust;
+        return null;
     }
 
     public String compareHands() {
