@@ -25,6 +25,8 @@ public class Pontoon extends AppCompatActivity {
     TextView mOutcome;
     Button mNewHandButton;
     Button mQuitButton;
+    Button mStickButton;
+    Button mTwistButton;
 
     PontoonGame mPontoonGame = new PontoonGame();
 
@@ -41,9 +43,13 @@ public class Pontoon extends AppCompatActivity {
         mOutcome = (TextView) findViewById(R.id.outcome_text);
         mNewHandButton = (Button) findViewById(R.id.new_hand_button);
         mQuitButton = (Button) findViewById(R.id.quit_button);
+        mStickButton = (Button) findViewById(R.id.stick_button);
+        mTwistButton = (Button) findViewById(R.id.twist_button);
 
         mNewHandButton.setVisibility(View.GONE);
         mQuitButton.setVisibility(View.GONE);
+        mStickButton.setVisibility(View.GONE);
+        mTwistButton.setVisibility(View.GONE);
 
         mDealButton.setOnClickListener(new View.OnClickListener() {
 
@@ -70,7 +76,6 @@ public class Pontoon extends AppCompatActivity {
                     mOutcome.setText(outcomeInitialDeal);
                     mNewHandButton.setVisibility(View.VISIBLE);
                     mQuitButton.setVisibility(View.VISIBLE);
-
                 }
                 // if outcome is null, move on to user hand
 
@@ -79,16 +84,24 @@ public class Pontoon extends AppCompatActivity {
 
                     mOutcome.setText(outcomeUserTurn);
 
-                    // if have to twist
-                        // display stick and twist buttons, stick disabled
-                    // if can stick or twist
-                        // display stick and twist buttons, both enabled
-                    // if bust
-                        // display quit and next hand buttons
-                    // if FCT
-                        // move on to dealer hand
+                    if ( mPontoonGame.userHasToTwist() ) {
+
+                        mStickButton.setVisibility(View.VISIBLE);
+                        mTwistButton.setVisibility(View.VISIBLE);
+                        mStickButton.setEnabled(false);
+                    }
+                    if ( mPontoonGame.userCanStickOrTwist() ) {
+
+                        mStickButton.setVisibility(View.VISIBLE);
+                        mTwistButton.setVisibility(View.VISIBLE);
+                    }
+                    if ( mPontoonGame.checkIfUserBust() ) {
+
+                        mNewHandButton.setVisibility(View.VISIBLE);
+                        mQuitButton.setVisibility(View.VISIBLE);
+                    }
                 }
-                // if outcome is null, move on to dealer hand
+                // if outcome is null or user Five Card Trick, move on to app hand
 
             }
         });
@@ -114,6 +127,29 @@ public class Pontoon extends AppCompatActivity {
 
                 Intent intent = new Intent(Pontoon.this, Main.class);
                 startActivity(intent);
+            }
+        });
+
+        mStickButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Log.d("Pontoon", "Stick button clicked");
+
+                //ToDo: stick button action
+            }
+        });
+
+        mTwistButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Log.d("Pontoon", "Twist button clicked");
+
+                //ToDo: twist button action -- different if user or app??
+                
             }
         });
     }
