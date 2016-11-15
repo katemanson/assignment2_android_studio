@@ -59,7 +59,7 @@ public class Pontoon extends AppCompatActivity {
                 Log.d("Pontoon", "Deal button clicked");
 
                 // removes button on click
-                //ToDo: ?difference between this and .setVisibility (as below)?
+                //ToDo: ?difference between this and .setVisibility?
                 ViewGroup parentView = (ViewGroup) view.getParent();
                 parentView.removeView(view);
 
@@ -67,42 +67,24 @@ public class Pontoon extends AppCompatActivity {
                 mPontoonGame.setUpNewDeck();
                 mPontoonGame.deal(2);
 
-                mAppCards.setText(mPontoonGame.showAppHandText());
                 mUserCards.setText(mPontoonGame.showUserHandText());
 
-                String outcomeInitialDeal = mPontoonGame.checkInitialDeal();
-                if (outcomeInitialDeal != null) {
+                if (mPontoonGame.checkInitialDeal() != null) {
 
-                    mOutcome.setText(outcomeInitialDeal);
-                    mNewHandButton.setVisibility(View.VISIBLE);
-                    mQuitButton.setVisibility(View.VISIBLE);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAppCards.setText(mPontoonGame.showAppHandText());
+                            mOutcome.setText(mPontoonGame.checkInitialDeal());
+                            mNewHandButton.setVisibility(View.VISIBLE);
+                            mQuitButton.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
                 }
-                // if outcome is null, move on to user hand
-
-                String outcomeUserTurn = mPontoonGame.checkUserHand();
-                if (outcomeUserTurn != null ) {
-
-                    mOutcome.setText(outcomeUserTurn);
-
-                    if ( mPontoonGame.userHasToTwist() ) {
-
-                        mStickButton.setVisibility(View.VISIBLE);
-                        mTwistButton.setVisibility(View.VISIBLE);
-                        mStickButton.setEnabled(false);
-                    }
-                    if ( mPontoonGame.userCanStickOrTwist() ) {
-
-                        mStickButton.setVisibility(View.VISIBLE);
-                        mTwistButton.setVisibility(View.VISIBLE);
-                    }
-                    if ( mPontoonGame.checkIfUserBust() ) {
-
-                        mNewHandButton.setVisibility(View.VISIBLE);
-                        mQuitButton.setVisibility(View.VISIBLE);
-                    }
+                else if (mPontoonGame.checkInitialDeal() == null) {
+                    userPlay();
                 }
-                // if outcome is null or user Five Card Trick, move on to app hand
-
             }
         });
 
@@ -113,6 +95,8 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "New Hand button clicked");
 
+                mNewHandButton.setVisibility(View.GONE);
+                mQuitButton.setVisibility(View.GONE);
                 //ToDo: ?Won't work on some earlier APIs?
                 recreate();
             }
@@ -125,6 +109,8 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Quit button clicked");
 
+                mNewHandButton.setVisibility(View.GONE);
+                mQuitButton.setVisibility(View.GONE);
                 Intent intent = new Intent(Pontoon.this, Main.class);
                 startActivity(intent);
             }
@@ -137,7 +123,9 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Stick button clicked");
 
-                //ToDo: stick button action
+                mStickButton.setVisibility(View.GONE);
+                mTwistButton.setVisibility(View.GONE);
+                appPlay();
             }
         });
 
@@ -148,9 +136,125 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Twist button clicked");
 
-                //ToDo: twist button action -- different if user or app??
-                
+                mStickButton.setVisibility(View.GONE);
+                mTwistButton.setVisibility(View.GONE);
+                mPontoonGame.userTwist();
+                mUserCards.setText(mPontoonGame.showUserHandText());
+                userPlay();
             }
         });
     }
+
+    public void userPlay() {
+
+        String outcomeUserTurn = mPontoonGame.checkUserHand();
+        if ( mPontoonGame.checkUserHand() != null ) {
+
+            mOutcome.setText(outcomeUserTurn);
+
+            if ( mPontoonGame.userHasToTwist() ) {
+
+                mStickButton.setVisibility(View.VISIBLE);
+                mTwistButton.setVisibility(View.VISIBLE);
+                mStickButton.setEnabled(false);
+            }
+            if ( mPontoonGame.userCanStickOrTwist() ) {
+
+                mStickButton.setVisibility(View.VISIBLE);
+                mTwistButton.setVisibility(View.VISIBLE);
+                mStickButton.setEnabled(true);
+            }
+            if ( mPontoonGame.checkIfUserBust() ) {
+
+                mNewHandButton.setVisibility(View.VISIBLE);
+                mQuitButton.setVisibility(View.VISIBLE);
+            }
+            if ( mPontoonGame.checkForUserFCT() ) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() { appPlay(); }
+                }, 4000);
+            }
+        }
+    }
+
+    public void appPlay() {
+
+        String outcomeAppTurn = mPontoonGame.checkAppHand();
+        if ( mPontoonGame.checkAppHand() != null ) {
+
+            mOutcome.setText(outcomeAppTurn);
+
+            if ( mPontoonGame.appHasToTwist() ) {
+
+                mPontoonGame.appTwist();
+
+                Handler handler = new Handler();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAppCards.setText(mPontoonGame.showAppHandText());
+                    }
+                }, 2000);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        appPlay();
+                    }
+                }, 4000);
+            }
+            if ( mPontoonGame.checkIfAppBust() ) {
+
+                //ToDo: Not sure this works?
+                mNewHandButton.setVisibility(View.VISIBLE);
+                mQuitButton.setVisibility(View.VISIBLE);
+                return;
+            }
+            if ( mPontoonGame.checkForAppFCT() ) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {}
+                }, 4000);
+                endGame();
+            }
+            if ( mPontoonGame.appStrategyTwist() ) {
+
+                mPontoonGame.appTwist();
+                mAppCards.setText(mPontoonGame.showAppHandText());
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        appPlay();
+                    }
+                }, 4000);
+            }
+            if ( mPontoonGame.appStrategyStick() ) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {}
+                }, 4000);
+                endGame();
+            }
+        }
+    }
+
+    public void endGame() {
+
+        String outcomeCompareHands = mPontoonGame.compareHands();
+        mOutcome.setText(outcomeCompareHands);
+
+        mNewHandButton.setVisibility(View.VISIBLE);
+        mQuitButton.setVisibility(View.VISIBLE);
+    }
+
 }

@@ -59,6 +59,10 @@ public class PontoonHandValuer implements HandValuer {
     public boolean checkIfBust(Hand hand) {
         int handSize = hand.countCards();
         int handValue = getHandValue(hand);
+        //ToDo: if statement immediately below deals (temporarily) with situation where player has two aces
+        if (handSize == 2 && handValue == 22) {
+            return false;
+        }
         if (handSize > 5 || handValue > 21) {
             return true;
         }

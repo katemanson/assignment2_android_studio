@@ -18,7 +18,7 @@
 
     <Button
         android:id="@+id/play_button"
-        android:text="Play"
+        android:text="New game"
         android:textSize="40sp"
         android:fontFamily="casual"
         android:layout_width="match_parent"

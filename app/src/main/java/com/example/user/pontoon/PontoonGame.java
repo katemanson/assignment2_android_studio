@@ -216,10 +216,10 @@ public class PontoonGame {
         if ( appPontoon && userPontoon ) {
             return resultBothPontoon;
         }
-        else if ( appPontoon ) {
+        if ( appPontoon ) {
             return resultAppPontoon;
         }
-        else if ( userPontoon ) {
+        if ( userPontoon ) {
             return resultUserPontoon;
         }
         return null;
@@ -235,13 +235,13 @@ public class PontoonGame {
         if ( userHasToTwist() ) {
             return haveToTwist;
         }
-        else if ( checkIfUserBust() ) {
+        if ( checkIfUserBust() ) {
             return resultUserBust;
         }
-        else if ( checkForUserFCT() ) {
+        if ( checkForUserFCT() ) {
             return outcomeUserFCT;
         }
-        else if ( userCanStickOrTwist() ) {
+        if ( userCanStickOrTwist() ) {
             return stickOrTwist;
         }
         return null;
@@ -290,19 +290,19 @@ public class PontoonGame {
         if ( appFCT && userFCT ) {
             return resultBothFCT;
         }
-        else if ( appFCT ) {
+        if ( appFCT ) {
             return resultAppFCT;
         }
-        else if ( userFCT ) {
+        if ( userFCT ) {
             return resultUserFCT;
         }
-        else if ( appValue == userValue ) {
+        if ( appValue == userValue ) {
             return resultEqualValues;
         }
-        else if ( appValue > userValue ) {
+        if ( appValue > userValue ) {
             return resultAppHigher;
         }
-        else if ( appValue < userValue ) {
+        if ( appValue < userValue ) {
             return resultUserHigher;
         }
         return null;
