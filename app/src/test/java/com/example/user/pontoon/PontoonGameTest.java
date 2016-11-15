@@ -48,9 +48,9 @@ public class PontoonGameTest {
 
     @Test
     public void canGetHandValuer() {
-        hand.addCard(kingOfClubs);
-        hand.addCard(aceOfDiamonds);
-        assertEquals(HandValuer.class, game.getHandValuer()));
+        // note (HandValuer.class, game.getHandValuer().getClass()) will compare a PontoonHandValuer,
+        // on RHS, with a HandValuer, on LHS, so will fail test
+        assertEquals(PontoonHandValuer.class, game.getHandValuer().getClass());
     }
 
     @Test
@@ -170,7 +170,7 @@ public class PontoonGameTest {
     public void canCheckIfAppBust_Bust() {
         game.getAppPlayer().getHand().addCard(sevenOfSpades);
         game.getAppPlayer().getHand().addCard(sixOfSpades);
-        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
         assertEquals(true, game.checkIfAppBust());
     }
 
@@ -185,7 +185,7 @@ public class PontoonGameTest {
     public void canCheckIfUserBust_Bust() {
         game.getUserPlayer().getHand().addCard(sevenOfSpades);
         game.getUserPlayer().getHand().addCard(sixOfSpades);
-        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
         assertEquals(true, game.checkIfUserBust());
     }
 
