@@ -31,6 +31,10 @@ public class SetOfCards {
         this.set.addAll(cardsFromOtherSet);
     }
 
+    public void addCardsFrom(ArrayList<Card> cardArrayList) {
+        this.set.addAll(cardArrayList);
+    }
+
     public void shuffle() {
         Collections.shuffle(this.set);
     }

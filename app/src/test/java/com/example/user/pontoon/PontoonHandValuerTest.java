@@ -167,4 +167,14 @@ public class PontoonHandValuerTest {
         assertEquals(true, values.checkForFiveCardTrick(hand));
     }
 
+    @Test
+    public void canGetTwistValue() {
+        hand.addCard(fiveOfHearts);
+        hand.addCard(fiveOfDiamonds);
+        hand.addCard(fourOfHearts);
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        assertEquals(26, values.getTwistValue(hand));
+    }
+
 }

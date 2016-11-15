@@ -2,6 +2,8 @@ package com.example.user.pontoon;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -54,6 +56,19 @@ public class SetOfCardsTest {
         populatedSet.addCard(threeOfClubs);
         assertEquals(5, populatedSet.countCards());
         set.addCardsFrom(populatedSet);
+        assertEquals(5, set.countCards());
+    }
+
+    @Test
+    public void canAddCardsFromAnArrayList() {
+        ArrayList<Card> cardArrayList = new ArrayList<>();
+        cardArrayList.add(aceOfHearts);
+        cardArrayList.add(nineOfClubs);
+        cardArrayList.add(tenOfDiamonds);
+        cardArrayList.add(queenOfSpades);
+        cardArrayList.add(threeOfClubs);
+        assertEquals(5, cardArrayList.size());
+        set.addCardsFrom(cardArrayList);
         assertEquals(5, set.countCards());
     }
 
