@@ -368,7 +368,21 @@ public class PontoonGameTest {
     }
 
     @Test
-    public void testCheckAppHand_Twist() {
+    public void testCheckAppHand_Twist_UserTwistOverSix() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        assertEquals("Dealer twists...", game.checkAppHand());
+    }
+
+    @Test
+    public void testCheckAppHand_Twist_AppOnFifteen() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(twoOfHearts);
         game.getAppPlayer().getHand().addCard(sixOfSpades);
         game.getAppPlayer().getHand().addCard(sevenOfSpades);
         game.getAppPlayer().getHand().addCard(twoOfHearts);
@@ -376,10 +390,24 @@ public class PontoonGameTest {
     }
 
     @Test
-    public void testCheckAppHand_Stick() {
-        game.getAppPlayer().getHand().addCard(kingOfClubs);
+    public void testCheckAppHand_Stick_UserTwistOverSix() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
         game.getAppPlayer().getHand().addCard(sixOfSpades);
-        game.getAppPlayer().getHand().addCard(twoOfHearts);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.getAppPlayer().getHand().addCard(sevenOfSpades);
+        assertEquals("Dealer sticks...", game.checkAppHand());
+    }
+
+    @Test
+    public void testCheckAppHand_Stick_AppHandOverSixteen() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(twoOfHearts);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
         assertEquals("Dealer sticks...", game.checkAppHand());
     }
 

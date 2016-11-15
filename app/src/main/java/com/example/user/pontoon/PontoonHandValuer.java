@@ -118,7 +118,7 @@ public class PontoonHandValuer implements HandValuer {
         int handSize = hand.countCards();
 
         ArrayList<Card> cards = hand.getSet();
-        ArrayList<Card> twistedCards = new ArrayList<Card>(cards.subList(2, cards.size()));
+        ArrayList<Card> twistedCards = new ArrayList<>(cards.subList(2, cards.size()));
         Hand twistedHand = new Hand();
         twistedHand.addCardsFrom(twistedCards);
 
