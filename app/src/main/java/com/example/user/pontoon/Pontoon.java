@@ -77,13 +77,24 @@ public class Pontoon extends AppCompatActivity {
                         public void run() {
                             mAppCards.setText(mPontoonGame.showAppHandText());
                             mOutcome.setText(mPontoonGame.checkInitialDeal());
+                        }
+                    }, 500);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
                             mNewHandButton.setVisibility(View.VISIBLE);
                             mQuitButton.setVisibility(View.VISIBLE);
                         }
                     }, 1000);
                 }
                 else if (mPontoonGame.checkInitialDeal() == null) {
-                    userPlay();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            userPlay();
+                        }
+                    }, 1000);
                 }
             }
         });
@@ -125,7 +136,14 @@ public class Pontoon extends AppCompatActivity {
 
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
-                appPlay();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                    appPlay();
+                    }
+                }, 1000);
             }
         });
 
@@ -140,7 +158,14 @@ public class Pontoon extends AppCompatActivity {
                 mTwistButton.setVisibility(View.GONE);
                 mPontoonGame.userTwist();
                 mUserCards.setText(mPontoonGame.showUserHandText());
-                userPlay();
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        userPlay();
+                    }
+                }, 1000);
             }
         });
     }
@@ -175,7 +200,7 @@ public class Pontoon extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() { appPlay(); }
-                }, 4000);
+                }, 3000);
             }
         }
     }
@@ -189,13 +214,11 @@ public class Pontoon extends AppCompatActivity {
 
             if ( mPontoonGame.appHasToTwist() ) {
 
-                mPontoonGame.appTwist();
-
                 Handler handler = new Handler();
-
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        mPontoonGame.appTwist();
                         mAppCards.setText(mPontoonGame.showAppHandText());
                     }
                 }, 2000);
@@ -205,36 +228,49 @@ public class Pontoon extends AppCompatActivity {
                     public void run() {
                         appPlay();
                     }
-                }, 4000);
+                }, 2000);
             }
             if ( mPontoonGame.checkIfAppBust() ) {
 
                 //ToDo: Not sure this works?
-                mNewHandButton.setVisibility(View.VISIBLE);
-                mQuitButton.setVisibility(View.VISIBLE);
-                return;
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mNewHandButton.setVisibility(View.VISIBLE);
+                        mQuitButton.setVisibility(View.VISIBLE);
+                        return;
+                    }
+                }, 2000);
+
             }
             if ( mPontoonGame.checkForAppFCT() ) {
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
-                    public void run() {}
-                }, 4000);
-                endGame();
+                    public void run() {
+                        endGame();
+                    }
+                }, 3000);
             }
             if ( mPontoonGame.appStrategyTwist() ) {
-
-                mPontoonGame.appTwist();
-                mAppCards.setText(mPontoonGame.showAppHandText());
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        mPontoonGame.appTwist();
+                        mAppCards.setText(mPontoonGame.showAppHandText());
+                    }
+                }, 2000);
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
                         appPlay();
                     }
-                }, 4000);
+                }, 2000);
             }
             if ( mPontoonGame.appStrategyStick() ) {
 
@@ -242,7 +278,7 @@ public class Pontoon extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {}
-                }, 4000);
+                }, 3000);
                 endGame();
             }
         }
