@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Pontoon</string>
     <string name="pontoon_rules">Rules text goes here...</string>
+    <string name="app_cards_default">Dealer hand: \n*Card face down* \n*Card face down*</string>
 </resources>

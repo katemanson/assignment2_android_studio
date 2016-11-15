@@ -67,6 +67,7 @@ public class Pontoon extends AppCompatActivity {
                 mPontoonGame.setUpNewDeck();
                 mPontoonGame.deal(2);
 
+                mAppCards.setText(R.id.app_cards);
                 mUserCards.setText(mPontoonGame.showUserHandText());
 
                 if (mPontoonGame.checkInitialDeal() != null) {
@@ -136,6 +137,7 @@ public class Pontoon extends AppCompatActivity {
 
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
+                mAppCards.setText(mPontoonGame.showAppHandText());
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -191,6 +193,7 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.checkIfUserBust() ) {
 
+                mAppCards.setText(mPontoonGame.showAppHandText());
                 mNewHandButton.setVisibility(View.VISIBLE);
                 mQuitButton.setVisibility(View.VISIBLE);
             }

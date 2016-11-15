@@ -80,6 +80,18 @@ public class PontoonGame {
         return appHand;
     }
 
+    public String hiddenAppHandText() {
+        ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
+
+        StringBuffer appCardsText = new StringBuffer();
+        for ( Card card : appCards ) {
+            appCardsText.append("\n*Card face down*");
+        }
+
+        String appHandHidden = "Dealer hand: " + appCardsText;
+        return appHandHidden;
+    }
+
     public String showUserHandText() {
         ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
 
@@ -91,6 +103,19 @@ public class PontoonGame {
         String userHand = "Your hand: " + userCardsText;
         return userHand;
     }
+
+    public String hiddenUserHandText() {
+        ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
+
+        StringBuffer userCardsText = new StringBuffer();
+        for ( Card card : userCards ) {
+            userCardsText.append("\n*Card face down*");
+        }
+
+        String userHandHidden = "Your hand: " + userCardsText;
+        return userHandHidden;
+    }
+
 
     public boolean checkForAppPontoon() {
         Hand appHand = this.appPlayer.getHand();
