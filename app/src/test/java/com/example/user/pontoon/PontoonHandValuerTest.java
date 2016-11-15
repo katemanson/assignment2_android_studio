@@ -41,10 +41,39 @@ public class PontoonHandValuerTest {
     }
 
     @Test
-    public void canGetHandValue() {
+    public void canGetRawHandValue_Pontoon() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(kingOfHearts);
+        assertEquals(21, values.getRawHandValue(hand));
+    }
+
+    @Test
+    public void canGetRawHandValue_TwoAces() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        assertEquals(22, values.getRawHandValue(hand));
+    }
+
+    @Test
+    public void canGetFinalHandValue_Pontoon() {
         hand.addCard(aceOfHearts);
         hand.addCard(kingOfHearts);
         assertEquals(21, values.getHandValue(hand));
+    }
+
+    @Test
+    public void canGetFinalHandValue_TwoAces() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        assertEquals(12, values.getHandValue(hand));
+    }
+
+    @Test
+    public void canGetFinalHandValue_TwoAcesPlus() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        hand.addCard(kingOfHearts);
+        assertEquals(12, values.getHandValue(hand));
     }
 
     @Test
@@ -55,11 +84,26 @@ public class PontoonHandValuerTest {
     }
 
     @Test
-    public void canCheckIfBust_Bust() {
+    public void canCheckIfBust_NotBust_WithAce() {
         hand.addCard(aceOfHearts);
         hand.addCard(kingOfHearts);
         hand.addCard(queenOfHearts);
-        assertEquals(true, values.checkIfBust(hand));
+        assertEquals(false, values.checkIfBust(hand));
+    }
+
+    @Test
+    public void canCheckIfBust_NotBust_TwoAces() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        assertEquals(false, values.checkIfBust(hand));
+    }
+
+    @Test
+    public void canCheckIfBust_NotBust_ThreeAces() {
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
+        assertEquals(false, values.checkIfBust(hand));
     }
 
     @Test
@@ -99,7 +143,7 @@ public class PontoonHandValuerTest {
         hand.addCard(fiveOfDiamonds);
         hand.addCard(fourOfHearts);
         hand.addCard(fourOfDiamonds);
-        hand.addCard(aceOfHearts);
+        hand.addCard(kingOfHearts);
         assertEquals(false, values.checkForFiveCardTrick(hand));
     }
 
@@ -110,6 +154,16 @@ public class PontoonHandValuerTest {
         hand.addCard(fourOfHearts);
         hand.addCard(fourOfDiamonds);
         hand.addCard(twoOfClubs);
+        assertEquals(true, values.checkForFiveCardTrick(hand));
+    }
+
+    @Test
+    public void canCheckForFiveCardTrick_FCT_WithAces() {
+        hand.addCard(fiveOfHearts);
+        hand.addCard(fiveOfDiamonds);
+        hand.addCard(fourOfHearts);
+        hand.addCard(aceOfHearts);
+        hand.addCard(aceOfHearts);
         assertEquals(true, values.checkForFiveCardTrick(hand));
     }
 

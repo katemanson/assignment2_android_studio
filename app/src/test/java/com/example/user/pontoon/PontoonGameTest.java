@@ -50,7 +50,7 @@ public class PontoonGameTest {
     public void canGetHandValuer() {
         hand.addCard(kingOfClubs);
         hand.addCard(aceOfDiamonds);
-        assertEquals(21, game.getHandValuer().getHandValue(hand));
+        assertEquals(HandValuer.class, game.getHandValuer()));
     }
 
     @Test
