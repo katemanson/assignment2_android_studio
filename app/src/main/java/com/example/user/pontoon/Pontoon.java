@@ -135,6 +135,7 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Stick button clicked");
 
+                mOutcome.setVisibility(View.INVISIBLE);
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
                 mAppCards.setText(mPontoonGame.hideAppCards());
@@ -157,6 +158,7 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Twist button clicked");
 
+                mOutcome.setVisibility(View.INVISIBLE);
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
                 mPontoonGame.userTwist();
@@ -178,6 +180,7 @@ public class Pontoon extends AppCompatActivity {
         String outcomeUserTurn = mPontoonGame.checkUserHand();
         if ( mPontoonGame.checkUserHand() != null ) {
 
+            mOutcome.setVisibility(View.VISIBLE);
             mOutcome.setText(outcomeUserTurn);
 
             if ( mPontoonGame.userHasToTwist() ) {
@@ -216,6 +219,7 @@ public class Pontoon extends AppCompatActivity {
         String outcomeAppTurn = mPontoonGame.checkAppHand();
         if ( mPontoonGame.checkAppHand() != null ) {
 
+            mOutcome.setVisibility(View.VISIBLE);
             mOutcome.setText(outcomeAppTurn);
 
             if ( mPontoonGame.appHasToTwist() ) {

@@ -87,11 +87,11 @@ public class PontoonGame {
         StringBuilder twistsText = new StringBuilder();
         if ( appCards.size() > 2 ) {
             for ( Card card : appTwists ) {
-                twistsText.append(card.getRank() + " of " + card.getSuit());
+                twistsText.append("\n" + card.getRank() + " of " + card.getSuit());
             }
         }
 
-        String appHand = "Dealer hand: \n*Card face down*\n*Card face down*\n" + twistsText;
+        String appHand = "Dealer hand: \n*Card face down*\n*Card face down*" + twistsText;
         return appHand;
     }
 
@@ -126,11 +126,11 @@ public class PontoonGame {
         StringBuilder twistsText = new StringBuilder();
         if ( userCards.size() > 2 ) {
             for ( Card card : userTwists ) {
-                twistsText.append(card.getRank() + " of " + card.getSuit());
+                twistsText.append("\n" + card.getRank() + " of " + card.getSuit());
             }
         }
 
-        String userHand = "Your hand: \n*Card face down*\n*Card face down*\n" + twistsText;
+        String userHand = "Your hand: \n*Card face down*\n*Card face down*" + twistsText;
         return userHand;
     }
 
