@@ -69,24 +69,42 @@ public class PontoonGameTest {
     }
 
     @Test
-    public void canShowAppHandText() {
+    public void canShowAppCards() {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         game.getAppPlayer().getHand().addCard(aceOfDiamonds);
-        assertEquals("Dealer hand: \nKING of CLUBS\nACE of DIAMONDS", game.showAppHandText());
+        assertEquals("Dealer hand: \nKING of CLUBS\nACE of DIAMONDS", game.showAppCards());
     }
 
     @Test
-    public void canShowHiddenAppHandText() {
+    public void canShowAppTwists() {
+        game.getAppPlayer().getHand().addCard(sixOfClubs);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
         game.getAppPlayer().getHand().addCard(kingOfClubs);
-        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
-        assertEquals("Dealer hand: \n*Card face down*\n*Card face down*", game.hiddenAppHandText());
+        assertEquals("Dealer hand: \n*Card face down*\n*Card face down*\nKING of CLUBS", game.showAppTwists());
+
     }
 
     @Test
-    public void canShowUserHandText() {
+    public void canShowHideAppCards() {
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        assertEquals("Dealer hand: \n*Card face down*\n*Card face down*", game.hideAppCards());
+    }
+
+    @Test
+    public void canShowUserTwists() {
+        game.getUserPlayer().getHand().addCard(sixOfClubs);
+        game.getUserPlayer().getHand().addCard(sixOfSpades);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
+        assertEquals("Your hand: \n*Card face down*\n*Card face down*\nKING of CLUBS", game.showUserTwists());
+
+    }
+
+    @Test
+    public void canShowUserCards() {
         game.getUserPlayer().getHand().addCard(sevenOfSpades);
         game.getUserPlayer().getHand().addCard(twoOfHearts);
-        assertEquals("Your hand: \nSEVEN of SPADES\nTWO of HEARTS", game.showUserHandText());
+        assertEquals("Your hand: \nSEVEN of SPADES\nTWO of HEARTS", game.showUserCards());
     }
 
     @Test

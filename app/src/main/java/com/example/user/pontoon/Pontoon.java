@@ -67,8 +67,8 @@ public class Pontoon extends AppCompatActivity {
                 mPontoonGame.setUpNewDeck();
                 mPontoonGame.deal(2);
 
-                mAppCards.setText(R.id.app_cards);
-                mUserCards.setText(mPontoonGame.showUserHandText());
+                mAppCards.setText(mPontoonGame.hideAppCards());
+                mUserCards.setText(mPontoonGame.showUserCards());
 
                 if (mPontoonGame.checkInitialDeal() != null) {
 
@@ -76,7 +76,7 @@ public class Pontoon extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mAppCards.setText(mPontoonGame.showAppHandText());
+                            mAppCards.setText(mPontoonGame.showAppCards());
                             mOutcome.setText(mPontoonGame.checkInitialDeal());
                         }
                     }, 500);
@@ -137,13 +137,14 @@ public class Pontoon extends AppCompatActivity {
 
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
-                mAppCards.setText(mPontoonGame.showAppHandText());
+                mAppCards.setText(mPontoonGame.showAppCards());
+                mUserCards.setText(mPontoonGame.hiddenUserHandText());
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                    appPlay();
+                        appPlay();
                     }
                 }, 1000);
             }
@@ -159,7 +160,7 @@ public class Pontoon extends AppCompatActivity {
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
                 mPontoonGame.userTwist();
-                mUserCards.setText(mPontoonGame.showUserHandText());
+                mUserCards.setText(mPontoonGame.showUserCards());
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -193,7 +194,7 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.checkIfUserBust() ) {
 
-                mAppCards.setText(mPontoonGame.showAppHandText());
+                mAppCards.setText(mPontoonGame.showAppCards());
                 mNewHandButton.setVisibility(View.VISIBLE);
                 mQuitButton.setVisibility(View.VISIBLE);
             }
@@ -202,7 +203,9 @@ public class Pontoon extends AppCompatActivity {
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
-                    public void run() { appPlay(); }
+                    public void run() {
+                        mUserCards.setText(mPontoonGame.hiddenUserHandText());
+                        appPlay(); }
                 }, 3000);
             }
         }
@@ -222,7 +225,7 @@ public class Pontoon extends AppCompatActivity {
                     @Override
                     public void run() {
                         mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppHandText());
+                        mAppCards.setText(mPontoonGame.showAppCards());
                     }
                 }, 2000);
 
@@ -259,12 +262,13 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.appStrategyTwist() ) {
 
+                //ToDo: ?not working -- want to delay on dealer twist, to show text
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppHandText());
+                        mAppCards.setText(mPontoonGame.showAppCards());
                     }
                 }, 2000);
 
@@ -277,17 +281,21 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.appStrategyStick() ) {
 
+                //ToDo: ?not working -- want to delay on dealer stick, to show text
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
-                    public void run() {}
+                    public void run() {
+                        endGame();
+                    }
                 }, 3000);
-                endGame();
             }
         }
     }
 
     public void endGame() {
+
+        mUserCards.setText(mPontoonGame.showUserCards());
 
         String outcomeCompareHands = mPontoonGame.compareHands();
         mOutcome.setText(outcomeCompareHands);

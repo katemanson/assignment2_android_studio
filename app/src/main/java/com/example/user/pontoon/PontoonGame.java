@@ -68,7 +68,7 @@ public class PontoonGame {
         }
     }
 
-    public String showAppHandText() {
+    public String showAppCards() {
         ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
 
         StringBuffer appCardsText = new StringBuffer();
@@ -80,10 +80,25 @@ public class PontoonGame {
         return appHand;
     }
 
-    public String hiddenAppHandText() {
+    public String showAppTwists() {
+        ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
+        ArrayList<Card> appTwists = new ArrayList<Card>(appCards.subList(2, appCards.size()));
+
+        StringBuilder twistsText = new StringBuilder();
+        if ( appCards.size() > 2 ) {
+            for ( Card card : appTwists ) {
+                twistsText.append(card.getRank() + " of " + card.getSuit());
+            }
+        }
+
+        String appHand = "Dealer hand: \n*Card face down*\n*Card face down*\n" + twistsText;
+        return appHand;
+    }
+
+    public String hideAppCards() {
         ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
 
-        StringBuffer appCardsText = new StringBuffer();
+        StringBuilder appCardsText = new StringBuilder();
         for ( Card card : appCards ) {
             appCardsText.append("\n*Card face down*");
         }
@@ -92,10 +107,10 @@ public class PontoonGame {
         return appHandHidden;
     }
 
-    public String showUserHandText() {
+    public String showUserCards() {
         ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
 
-        StringBuffer userCardsText = new StringBuffer();
+        StringBuilder userCardsText = new StringBuilder();
         for ( Card card : userCards ) {
             userCardsText.append("\n" + card.getRank() + " of " + card.getSuit());
         }
@@ -104,10 +119,25 @@ public class PontoonGame {
         return userHand;
     }
 
+    public String showUserTwists() {
+        ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
+        ArrayList<Card> userTwists = new ArrayList<Card>(userCards.subList(2, userCards.size()));
+
+        StringBuilder twistsText = new StringBuilder();
+        if ( userCards.size() > 2 ) {
+            for ( Card card : userTwists ) {
+                twistsText.append(card.getRank() + " of " + card.getSuit());
+            }
+        }
+
+        String userHand = "Your hand: \n*Card face down*\n*Card face down*\n" + twistsText;
+        return userHand;
+    }
+
     public String hiddenUserHandText() {
         ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
 
-        StringBuffer userCardsText = new StringBuffer();
+        StringBuilder userCardsText = new StringBuilder();
         for ( Card card : userCards ) {
             userCardsText.append("\n*Card face down*");
         }
