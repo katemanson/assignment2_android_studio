@@ -234,24 +234,23 @@ public class PontoonGame {
     }
 
     public boolean appStrategyTwist() {
-        Hand userHand = this.userPlayer.getHand();
-        int userTwistValue = this.handValuer.getTwistValue(userHand);
+        int handSize = getAppHandSize();
+        int handValue = getAppHandValue();
 
-        if ( getAppHandSize() < 5 ) {
-            if ( userTwistValue > 6 && getAppHandValue() <= 18 ) {
-                return true;
-            }
-            if ( getAppHandValue() <= 16 ) {
-                return true;
-            }
+        if ( handSize < 5 && (handValue == 15 || handValue == 16) ) {
+            return true;
         }
         return false;
     }
 
     public boolean appStrategyStick() {
+        int handSize = getAppHandSize();
+        int handValue = getAppHandValue();
 
-        // ToDo: check this is correct -- all possibilities?
-        return !appStrategyTwist();
+        if ( handSize < 5 && (handValue >= 17 && handValue <= 21) ) {
+            return true;
+        }
+        return false;
     }
 
     public boolean userCanStickOrTwist() {

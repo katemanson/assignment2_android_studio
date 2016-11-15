@@ -63,7 +63,7 @@ public class Pontoon extends AppCompatActivity {
                 ViewGroup parentView = (ViewGroup) view.getParent();
                 parentView.removeView(view);
 
-                //ToDo: ?is setUpNewDeck in the right place? Differs if starting game after a Pontoon...
+                //ToDo: ?deck setup differs if starting game after a Pontoon...
                 mPontoonGame.setUpNewDeck();
                 mPontoonGame.deal(2);
 
@@ -255,7 +255,6 @@ public class Pontoon extends AppCompatActivity {
                         return;
                     }
                 }, 2000);
-
             }
             if ( mPontoonGame.checkForAppFCT() ) {
 
@@ -271,7 +270,7 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.appStrategyTwist() ) {
 
-                //ToDo: ?not working -- want to delay on dealer twist, to show text
+                //ToDo: ?not working -- want to delay on app twist, to show text
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -290,7 +289,7 @@ public class Pontoon extends AppCompatActivity {
             }
             if ( mPontoonGame.appStrategyStick() ) {
 
-                //ToDo: ?not working -- want to delay on dealer stick, to show text
+                //ToDo: ?not working -- want to delay on app stick, to show text
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
