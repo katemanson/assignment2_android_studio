@@ -108,10 +108,10 @@ public class PontoonGameTest {
     }
 
     @Test
-    public void canShowHiddenUserHandText() {
+    public void canShowHideUserCards() {
         game.getUserPlayer().getHand().addCard(kingOfClubs);
         game.getUserPlayer().getHand().addCard(aceOfDiamonds);
-        assertEquals("Your hand: \n*Card face down*\n*Card face down*", game.hiddenUserHandText());
+        assertEquals("Your hand: \n*Card face down*\n*Card face down*", game.hideUserCards());
     }
 
     @Test

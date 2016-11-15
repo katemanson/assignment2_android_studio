@@ -134,7 +134,7 @@ public class PontoonGame {
         return userHand;
     }
 
-    public String hiddenUserHandText() {
+    public String hideUserCards() {
         ArrayList<Card> userCards = this.userPlayer.getHand().getSet();
 
         StringBuilder userCardsText = new StringBuilder();
