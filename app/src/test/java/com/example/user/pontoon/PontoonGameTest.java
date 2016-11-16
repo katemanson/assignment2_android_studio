@@ -390,6 +390,15 @@ public class PontoonGameTest {
     }
 
     @Test
+    public void canGetUserTwistValue() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
+        assertEquals(10, game.getHandValuer().getTwistValue(game.getUserPlayer().getHand()));
+    }
+
+
+    @Test
     public void testCheckAppHand_Stick_UserTwistOverSix() {
         game.getUserPlayer().getHand().addCard(aceOfDiamonds);
         game.getUserPlayer().getHand().addCard(aceOfDiamonds);

@@ -72,30 +72,14 @@ public class Pontoon extends AppCompatActivity {
 
                 if (mPontoonGame.checkInitialDeal() != null) {
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mAppCards.setText(mPontoonGame.showAppCards());
-                            mOutcome.setText(mPontoonGame.checkInitialDeal());
-                        }
-                    }, 500);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mNewHandButton.setVisibility(View.VISIBLE);
-                            mQuitButton.setVisibility(View.VISIBLE);
-                        }
-                    }, 1000);
+                    mAppCards.setText(mPontoonGame.showAppCards());
+                    mOutcome.setText(mPontoonGame.checkInitialDeal());
+
+                    mNewHandButton.setVisibility(View.VISIBLE);
+                    mQuitButton.setVisibility(View.VISIBLE);
                 }
                 else if (mPontoonGame.checkInitialDeal() == null) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            userPlay();
-                        }
-                    }, 1000);
+                    userPlay();
                 }
             }
         });
@@ -163,14 +147,8 @@ public class Pontoon extends AppCompatActivity {
                 mTwistButton.setVisibility(View.GONE);
                 mPontoonGame.userTwist();
                 mUserCards.setText(mPontoonGame.showUserCards());
+                userPlay();
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        userPlay();
-                    }
-                }, 1000);
             }
         });
     }
@@ -189,27 +167,22 @@ public class Pontoon extends AppCompatActivity {
                 mTwistButton.setVisibility(View.VISIBLE);
                 mStickButton.setEnabled(false);
             }
-            if ( mPontoonGame.userCanStickOrTwist() ) {
+            else if ( mPontoonGame.userCanStickOrTwist() ) {
 
                 mStickButton.setVisibility(View.VISIBLE);
                 mTwistButton.setVisibility(View.VISIBLE);
                 mStickButton.setEnabled(true);
             }
-            if ( mPontoonGame.checkIfUserBust() ) {
+            else if ( mPontoonGame.checkIfUserBust() ) {
 
                 mAppCards.setText(mPontoonGame.showAppCards());
                 mNewHandButton.setVisibility(View.VISIBLE);
                 mQuitButton.setVisibility(View.VISIBLE);
             }
-            if ( mPontoonGame.checkForUserFCT() ) {
+            else if ( mPontoonGame.checkForUserFCT() ) {
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                    mUserCards.setText(mPontoonGame.hideUserCards());
-                    appPlay(); }
-                }, 3000);
+                mUserCards.setText(mPontoonGame.showUserTwists());
+                appPlay();
             }
         }
     }
@@ -224,81 +197,46 @@ public class Pontoon extends AppCompatActivity {
 
             if ( mPontoonGame.appHasToTwist() ) {
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppTwists());
-                    }
-                }, 2000);
-
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        appPlay();
-                    }
-                }, 2000);
+                Log.d("Pontoon", "appHasToTwist TRUE; appHandValue: " + mPontoonGame.getAppHandValue() );
+                mPontoonGame.appTwist();
+                mAppCards.setText(mPontoonGame.showAppTwists());
+                appPlay();
             }
-            if ( mPontoonGame.checkIfAppBust() ) {
+            else if ( mPontoonGame.checkIfAppBust() ) {
 
+                Log.d("Pontoon", "checkIfAppBust TRUE; appHandValue: " + mPontoonGame.getAppHandValue() );
                 mAppCards.setText(mPontoonGame.showAppCards());
                 mUserCards.setText(mPontoonGame.showUserCards());
 
-                //ToDo: Not sure this works?
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mNewHandButton.setVisibility(View.VISIBLE);
-                        mQuitButton.setVisibility(View.VISIBLE);
-                        return;
-                    }
-                }, 2000);
+                mNewHandButton.setVisibility(View.VISIBLE);
+                mQuitButton.setVisibility(View.VISIBLE);
             }
-            if ( mPontoonGame.checkForAppFCT() ) {
+            else if ( mPontoonGame.checkForAppFCT() ) {
 
+                Log.d("Pontoon", "checkForAppFCT TRUE; appHandValue: " + mPontoonGame.getAppHandValue() );
                 mAppCards.setText(mPontoonGame.showAppCards());
                 mUserCards.setText(mPontoonGame.showUserCards());
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        endGame();
-                    }
-                }, 3000);
+                endGame();
             }
-            if ( mPontoonGame.appStrategyTwist() ) {
+            else if ( mPontoonGame.appStrategyTwist() ) {
 
-                //ToDo: ?not working -- want to delay on app twist, to show text
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppTwists());
-                    }
-                }, 2000);
+                Hand userHand = mPontoonGame.getUserPlayer().getHand();
+                int userTwistValue = mPontoonGame.getHandValuer().getTwistValue(userHand);
 
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        appPlay();
-                    }
-                }, 2000);
+                Log.d("Pontoon", "appStrategyTwist TRUE; appHandValue: " + mPontoonGame.getAppHandValue() + "\nuserTwistValue: " + userTwistValue);
+                mPontoonGame.appTwist();
+                mAppCards.setText(mPontoonGame.showAppTwists());
+                appPlay();
             }
-            if ( mPontoonGame.appStrategyStick() ) {
+            else if ( mPontoonGame.appStrategyStick() ) {
 
-                //ToDo: ?not working -- want to delay on app stick, to show text
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAppCards.setText(mPontoonGame.showAppCards());
-                        mUserCards.setText(mPontoonGame.showUserCards());
-                        endGame();
-                    }
-                }, 3000);
+                Hand userHand = mPontoonGame.getUserPlayer().getHand();
+                int userTwistValue = mPontoonGame.getHandValuer().getTwistValue(userHand);
+
+                Log.d("Pontoon", "appStrategyStick TRUE; appHandValue: " + mPontoonGame.getAppHandValue() + "\nuserTwistValue: " + userTwistValue);
+                mAppCards.setText(mPontoonGame.showAppCards());
+                mUserCards.setText(mPontoonGame.showUserCards());
+                endGame();
             }
         }
     }

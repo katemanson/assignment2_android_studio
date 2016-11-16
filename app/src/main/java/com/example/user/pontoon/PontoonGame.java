@@ -1,4 +1,6 @@
 package com.example.user.pontoon;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class PontoonGame {
         return this.deck;
     }
 
-    public HandValuer getHandValuer() {
+    public PontoonHandValuer getHandValuer() {
         return this.handValuer;
     }
 
@@ -82,7 +84,7 @@ public class PontoonGame {
 
     public String showAppTwists() {
         ArrayList<Card> appCards = this.appPlayer.getHand().getSet();
-        ArrayList<Card> appTwists = new ArrayList<Card>(appCards.subList(2, appCards.size()));
+        ArrayList<Card> appTwists = new ArrayList<>(appCards.subList(2, appCards.size()));
 
         StringBuilder twistsText = new StringBuilder();
         if ( appCards.size() > 2 ) {
@@ -224,6 +226,7 @@ public class PontoonGame {
     public boolean appHasToTwist() {
         Hand appHand = this.appPlayer.getHand();
         boolean hasToTwist = this.handValuer.checkIfMustTwist(appHand);
+
         return hasToTwist;
     }
 
@@ -234,23 +237,37 @@ public class PontoonGame {
     }
 
     public boolean appStrategyTwist() {
+
         int handSize = getAppHandSize();
         int handValue = getAppHandValue();
+        Hand userHand = this.userPlayer.getHand();
+        int userTwistValue = this.handValuer.getTwistValue(userHand);
 
-        if ( handSize < 5 && (handValue == 15 || handValue == 16) ) {
+        if ( getAppHandSize() < 5 && userTwistValue > 6 && getAppHandValue() <= 18 ) {
+            return true;
+        }
+        else if ( getAppHandSize() < 5 && getAppHandValue() <= 16 ) {
             return true;
         }
         return false;
     }
 
     public boolean appStrategyStick() {
+
+        //ToDo: WHAT THE HELL IS GOING ON HERE?
         int handSize = getAppHandSize();
         int handValue = getAppHandValue();
 
-        if ( handSize < 5 && (handValue >= 17 && handValue <= 21) ) {
+        Hand userHand = this.userPlayer.getHand();
+        int userTwistValue = this.handValuer.getTwistValue(userHand);
+
+        if ( handSize >= 5 ) {
             return true;
         }
-        return false;
+        if ( handSize < 5 && userTwistValue <= 6 && handValue >=16 ) {
+            return true;
+        }
+        return true;
     }
 
     public boolean userCanStickOrTwist() {

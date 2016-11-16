@@ -1,5 +1,7 @@
 package com.example.user.pontoon;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -63,7 +65,6 @@ public class PontoonHandValuer implements HandValuer {
                 handValue -= 10;
             }
         }
-
         return handValue;
     }
 
@@ -112,6 +113,10 @@ public class PontoonHandValuer implements HandValuer {
             return true;
         }
         return false;
+    }
+
+    public void crazyMethod(Hand hand){
+
     }
 
     public int getTwistValue(Hand hand) {
