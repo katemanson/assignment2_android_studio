@@ -56,6 +56,38 @@ public class PontoonGameTest {
     }
 
     @Test
+    public void canGetAppWinCount_NoWins() {
+        assertEquals(0, game.getAppWinCount());
+    }
+
+    @Test
+    public void canGetUserWinCount_NoWins() {
+        assertEquals(0, game.getUserWinCount());
+    }
+
+    @Test
+    public void canGetWinCounts_AppWin() {
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        game.getUserPlayer().getHand().addCard(sevenOfSpades);
+        game.getUserPlayer().getHand().addCard(sixOfSpades);
+        game.checkInitialDeal();
+        assertEquals(1, game.getAppWinCount());
+        assertEquals(0, game.getUserWinCount());
+    }
+
+    @Test
+    public void canGetUserWinCount_Wins() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(sevenOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.checkInitialDeal();
+        assertEquals(0, game.getAppWinCount());
+        assertEquals(1, game.getUserWinCount());
+    }
+
+    @Test
     public void canSetUpNewDeck() {
         game.setUpNewDeck();
         assertEquals(52, game.getDeck().countCards());
@@ -346,7 +378,7 @@ public class PontoonGameTest {
     public void testCheckAppHand_HaveToTwist() {
         game.getAppPlayer().getHand().addCard(twoOfHearts);
         game.getAppPlayer().getHand().addCard(kingOfClubs);
-        assertEquals("Since their hand is worth less than 15, Dealer must twist...", game.checkAppHand());
+        assertEquals("Dealer twists...", game.checkAppHand());
     }
 
     @Test
@@ -453,7 +485,6 @@ public class PontoonGameTest {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         assertEquals(false, game.appStrategyTwist());
     }
-
 
     @Test
     public void testCompareHands_AppFCT() {

@@ -14,12 +14,16 @@ public class PontoonGame {
     private Player userPlayer;
     private Deck deck;
     private PontoonHandValuer handValuer;
+    private int userWinCount;
+    private int appWinCount;
 
     public PontoonGame () {
         this.appPlayer = new Player("AppPlayer", true);
         this.userPlayer = new Player("UserPlayer", false);
         this.deck = new OneStandardDeck();
         this.handValuer = new PontoonHandValuer();
+        this.userWinCount = 0;
+        this.appWinCount = 0;
     }
 
     public Player getAppPlayer() {
@@ -36,6 +40,14 @@ public class PontoonGame {
 
     public PontoonHandValuer getHandValuer() {
         return this.handValuer;
+    }
+
+    public int getAppWinCount() {
+        return this.appWinCount;
+    }
+
+    public int getUserWinCount() {
+        return this.userWinCount;
     }
 
     public void setUpNewDeck() {
@@ -260,12 +272,15 @@ public class PontoonGame {
         String resultUserPontoon = "You have Pontoon. \nDealer has " + appValue + ". \nYou win this hand!";
 
         if ( checkForAppPontoon() && checkForUserPontoon() ) {
+            appWinCount++;
             return resultBothPontoon;
         }
         if ( checkForAppPontoon() ) {
+            appWinCount++;
             return resultAppPontoon;
         }
         if ( checkForUserPontoon() ) {
+            userWinCount++;
             return resultUserPontoon;
         }
         return null;
@@ -332,21 +347,27 @@ public class PontoonGame {
         String resultUserHigher = "You have " + userValue + ". \nDealer has " + appValue + ". \nYou win this hand!";
 
         if ( checkForAppFCT() && checkForUserFCT() ) {
+            appWinCount++;
             return resultBothFCT;
         }
         if ( checkForAppFCT() ) {
+            appWinCount++;
             return resultAppFCT;
         }
         if ( checkForUserFCT() ) {
+            userWinCount++;
             return resultUserFCT;
         }
         if ( getAppHandValue() == getUserHandValue() ) {
+            appWinCount++;
             return resultEqualValues;
         }
         if ( getAppHandValue() > getUserHandValue() ) {
+            appWinCount++;
             return resultAppHigher;
         }
         if ( getAppHandValue() < getUserHandValue() ) {
+            userWinCount++;
             return resultUserHigher;
         }
         return null;
