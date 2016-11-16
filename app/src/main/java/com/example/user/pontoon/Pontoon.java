@@ -32,7 +32,6 @@ public class Pontoon extends AppCompatActivity {
 
     Handler delayHandler = new Handler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -119,7 +118,7 @@ public class Pontoon extends AppCompatActivity {
 
                 mNewHandButton.setVisibility(View.GONE);
                 mQuitButton.setVisibility(View.GONE);
-                Intent intent = new Intent(Pontoon.this, Main.class);
+                Intent intent = new Intent(Pontoon.this, Results.class);
                 startActivity(intent);
             }
         });

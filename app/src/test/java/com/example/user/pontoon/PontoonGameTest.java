@@ -588,4 +588,25 @@ public class PontoonGameTest {
         assertEquals(Rank.SEVEN, card.getRank());
     }
 
+    @Test
+    public void canGetResultsText_AppWins() {
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        game.getUserPlayer().getHand().addCard(sevenOfSpades);
+        game.getUserPlayer().getHand().addCard(sixOfSpades);
+        game.checkInitialDeal();
+        game.checkInitialDeal();
+        assertEquals("Dealer had: 2 wins\nYou had: 0 wins", game.getResultsText());
+    }
+
+    @Test
+    public void canGetResultsText_UserWin() {
+        game.getUserPlayer().getHand().addCard(aceOfDiamonds);
+        game.getUserPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(sevenOfSpades);
+        game.getAppPlayer().getHand().addCard(sixOfSpades);
+        game.checkInitialDeal();
+        assertEquals("Dealer had: 0 wins\nYou had: 1 win", game.getResultsText());
+    }
+
 }

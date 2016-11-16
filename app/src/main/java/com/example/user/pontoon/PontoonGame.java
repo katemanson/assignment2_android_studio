@@ -373,4 +373,21 @@ public class PontoonGame {
         return null;
     }
 
+    public String getResultsText() {
+
+        String appWinSingPlural;
+        if ( getAppWinCount() == 1 ) {
+            appWinSingPlural = " win";
+        }
+        else appWinSingPlural = " wins";
+
+        String userWinSingPlural;
+        if ( getUserWinCount() == 1 ) {
+            userWinSingPlural = " win";
+        }
+        else userWinSingPlural = " wins";
+
+        return "Dealer had: " + getAppWinCount() + appWinSingPlural + "\nYou had: " + getUserWinCount() + userWinSingPlural;
+    }
+
 }
