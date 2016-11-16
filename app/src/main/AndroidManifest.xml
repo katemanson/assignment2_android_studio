@@ -23,18 +23,6 @@
             android:parentActivityName=".Main">
         </activity>
 
-        <activity
-            android:name=".PontoonRules"
-            android:label="Pontoon"
-            android:parentActivityName=".Main">
-        </activity>
-
-        <activity
-            android:name=".Results"
-            android:label="Pontoon"
-            android:parentActivityName=".Main">
-        </activity>
-
     </application>
 
 </manifest>
