@@ -17,6 +17,7 @@ public class PontoonGameTest {
     Card sevenOfSpades;
     Card sixOfSpades;
     Card sixOfClubs;
+    Card fiveOfHearts;
     Hand hand;
 
     @Before
@@ -28,6 +29,7 @@ public class PontoonGameTest {
         sevenOfSpades = new Card(Suit.SPADES, Rank.SEVEN);
         sixOfSpades = new Card(Suit.SPADES, Rank.SIX);
         sixOfClubs = new Card(Suit.CLUBS, Rank.SIX);
+        fiveOfHearts = new Card(Suit.HEARTS, Rank.FIVE);
         hand = new Hand();
     }
 
@@ -427,6 +429,31 @@ public class PontoonGameTest {
         game.getAppPlayer().getHand().addCard(kingOfClubs);
         assertEquals("Dealer is bust! \nYou win this hand.", game.checkAppHand());
     }
+
+    @Test
+    public void testAppStrategyTwist_AceFive() {
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(fiveOfHearts);
+        assertEquals(true, game.appStrategyTwist());
+    }
+
+    @Test
+    public void testAppStrategyTwist_AceFiveKing() {
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(fiveOfHearts);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        assertEquals(true, game.appStrategyTwist());
+    }
+
+    @Test
+    public void testAppStrategyTwist_AceFiveKingKing() {
+        game.getAppPlayer().getHand().addCard(aceOfDiamonds);
+        game.getAppPlayer().getHand().addCard(fiveOfHearts);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        game.getAppPlayer().getHand().addCard(kingOfClubs);
+        assertEquals(false, game.appStrategyTwist());
+    }
+
 
     @Test
     public void testCompareHands_AppFCT() {

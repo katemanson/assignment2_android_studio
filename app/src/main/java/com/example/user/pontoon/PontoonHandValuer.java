@@ -115,21 +115,15 @@ public class PontoonHandValuer implements HandValuer {
         return false;
     }
 
-    public void crazyMethod(Hand hand){
-
-    }
-
     public int getTwistValue(Hand hand) {
         int handSize = hand.countCards();
 
-        ArrayList<Card> cards = hand.getSet();
-        ArrayList<Card> twistedCards = new ArrayList<>(cards.subList(2, cards.size()));
-        Hand twistedHand = new Hand();
-        twistedHand.addCardsFrom(twistedCards);
-
-        int twistValue = getRawHandValue(twistedHand);
-
         if ( handSize > 2 ) {
+            ArrayList<Card> cards = hand.getSet();
+            ArrayList<Card> twistedCards = new ArrayList<>(cards.subList(2, cards.size()));
+            Hand twistedHand = new Hand();
+            twistedHand.addCardsFrom(twistedCards);
+            int twistValue = getRawHandValue(twistedHand);
             return twistValue;
         }
         return 0;
