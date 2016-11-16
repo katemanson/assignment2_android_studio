@@ -3,30 +3,36 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/rules_button"
-        android:text="Rules"
-        android:textSize="40sp"
-        android:fontFamily="casual"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        style="@style/Widget.AppCompat.Button"
-        />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/play_button"
-        android:text="New game"
-        android:textSize="40sp"
-        android:fontFamily="casual"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_below="@+id/rules_button"
-        style="@style/Widget.AppCompat.Button" />
+        <Button
+            android:id="@+id/rules_button"
+            android:text="Rules"
+            android:textSize="40sp"
+            android:fontFamily="casual"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            style="@style/Widget.AppCompat.Button"
+            />
+
+        <Button
+            android:id="@+id/play_button"
+            android:text="New game"
+            android:textSize="40sp"
+            android:fontFamily="casual"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_below="@+id/rules_button"
+            style="@style/Widget.AppCompat.Button" />
+
+    </ScrollView>
 
 </RelativeLayout>

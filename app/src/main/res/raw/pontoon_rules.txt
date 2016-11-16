@@ -1,0 +1,14 @@
+Possible hands, in order of value, are:
+- Pontoon — 21 points in two cards (so, an ace and a face card)
+- Five Card Trick — five cards totalling 21 or less
+- Card value, up to and including 21 (pip value, face cards 10, Aces 1 or 11)
+- Hands with a value of more than 21 are bust.
+
+1. Initial deal of two cards each.
+2. Player (the user) plays their hand first, followed by the dealer (the app).
+3. If either has a hand worth less than 15, they must twist.
+4. If their hand is worth 15 or more (but not bust) they can choose either to stick or to twist.
+5. A Five Card Trick effectively ends their turn.
+6. During play each player's first two cards remain hidden from their opponent, while twist cards are visible.
+7. If the dealer and the player finish their turns without going bust, they each show all their cards.
+8. If the hands are of equal value, the dealer wins.
