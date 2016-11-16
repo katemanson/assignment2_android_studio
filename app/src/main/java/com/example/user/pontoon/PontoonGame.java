@@ -78,8 +78,7 @@ public class PontoonGame {
             appCardsText.append("\n" + card.getRank() + " of " + card.getSuit());
         }
 
-        String appHand = "Dealer hand: " + appCardsText;
-        return appHand;
+        return "Dealer hand: " + appCardsText;
     }
 
     public String showAppTwists() {
@@ -93,8 +92,7 @@ public class PontoonGame {
             }
         }
 
-        String appHand = "Dealer hand: \n*Card face down*\n*Card face down*" + twistsText;
-        return appHand;
+        return "Dealer hand: \n*Card face down*\n*Card face down*" + twistsText;
     }
 
     public String hideAppCards() {
@@ -105,8 +103,7 @@ public class PontoonGame {
             appCardsText.append("\n*Card face down*");
         }
 
-        String appHandHidden = "Dealer hand: " + appCardsText;
-        return appHandHidden;
+        return "Dealer hand: " + appCardsText;
     }
 
     public String showUserCards() {
@@ -117,8 +114,7 @@ public class PontoonGame {
             userCardsText.append("\n" + card.getRank() + " of " + card.getSuit());
         }
 
-        String userHand = "Your hand: " + userCardsText;
-        return userHand;
+        return "Your hand: " + userCardsText;
     }
 
     public String showUserTwists() {
@@ -132,8 +128,7 @@ public class PontoonGame {
             }
         }
 
-        String userHand = "Your hand: \n*Card face down*\n*Card face down*" + twistsText;
-        return userHand;
+        return "Your hand: \n*Card face down*\n*Card face down*" + twistsText;
     }
 
     public String hideUserCards() {
@@ -144,45 +139,38 @@ public class PontoonGame {
             userCardsText.append("\n*Card face down*");
         }
 
-        String userHandHidden = "Your hand: " + userCardsText;
-        return userHandHidden;
+        return "Your hand: " + userCardsText;
     }
 
 
     public boolean checkForAppPontoon() {
         Hand appHand = this.appPlayer.getHand();
-        boolean pontoon = this.handValuer.checkForPontoon(appHand);
-        return pontoon;
+        return this.handValuer.checkForPontoon(appHand);
     }
 
     public boolean checkForUserPontoon() {
         Hand userHand = this.userPlayer.getHand();
-        boolean pontoon = this.handValuer.checkForPontoon(userHand);
-        return pontoon;
+        return this.handValuer.checkForPontoon(userHand);
     }
 
     public int getAppHandValue() {
         Hand appHand = this.appPlayer.getHand();
-        int value = this.handValuer.getHandValue(appHand);
-        return value;
+        return this.handValuer.getHandValue(appHand);
     }
 
     public int getUserHandValue() {
         Hand userHand = this.userPlayer.getHand();
-        int value = this.handValuer.getHandValue(userHand);
-        return value;
+        return this.handValuer.getHandValue(userHand);
     }
 
     public int getAppHandSize() {
         Hand appHand = this.appPlayer.getHand();
-        int size = appHand.countCards();
-        return size;
+        return appHand.countCards();
     }
 
     public int getUserHandSize() {
         Hand userHand = this.userPlayer.getHand();
-        int size = userHand.countCards();
-        return size;
+        return userHand.countCards();
     }
 
     public void appTwist() {
@@ -199,47 +187,38 @@ public class PontoonGame {
 
     public boolean checkIfAppBust() {
         Hand appHand = this.appPlayer.getHand();
-        boolean bust = this.handValuer.checkIfBust(appHand);
-        return bust;
+        return this.handValuer.checkIfBust(appHand);
     }
 
     public boolean checkIfUserBust() {
         Hand userHand = this.userPlayer.getHand();
-        boolean bust = this.handValuer.checkIfBust(userHand);
-        return bust;
+        return this.handValuer.checkIfBust(userHand);
     }
 
     // FCT - Five Card Trick
     public boolean checkForAppFCT() {
         Hand appHand = this.appPlayer.getHand();
-        boolean fiveCardTrick = this.handValuer.checkForFiveCardTrick(appHand);
-        return fiveCardTrick;
+        return this.handValuer.checkForFiveCardTrick(appHand);
     }
 
     // FCT - Five Card Trick
     public boolean checkForUserFCT() {
         Hand userHand = this.userPlayer.getHand();
-        boolean fiveCardTrick = this.handValuer.checkForFiveCardTrick(userHand);
-        return fiveCardTrick;
+        return this.handValuer.checkForFiveCardTrick(userHand);
     }
 
     public boolean appHasToTwist() {
         Hand appHand = this.appPlayer.getHand();
-        boolean hasToTwist = this.handValuer.checkIfMustTwist(appHand);
-
-        return hasToTwist;
+        return this.handValuer.checkIfMustTwist(appHand);
     }
 
     public boolean userHasToTwist() {
         Hand userHand = this.userPlayer.getHand();
-        boolean hasToTwist = this.handValuer.checkIfMustTwist(userHand);
-        return hasToTwist;
+        return this.handValuer.checkIfMustTwist(userHand);
     }
 
     public boolean appStrategyTwist() {
 
-        int handSize = getAppHandSize();
-        int handValue = getAppHandValue();
         Hand userHand = this.userPlayer.getHand();
         int userTwistValue = this.handValuer.getTwistValue(userHand);
 
@@ -254,17 +233,13 @@ public class PontoonGame {
 
     public boolean appStrategyStick() {
 
-        //ToDo: WHAT THE HELL IS GOING ON HERE?
-        int handSize = getAppHandSize();
-        int handValue = getAppHandValue();
-
         Hand userHand = this.userPlayer.getHand();
         int userTwistValue = this.handValuer.getTwistValue(userHand);
 
-        if ( handSize >= 5 ) {
+        if ( getAppHandSize() >= 5 ) {
             return true;
         }
-        if ( handSize < 5 && userTwistValue <= 6 && handValue >=16 ) {
+        if ( getAppHandSize() < 5 && userTwistValue <= 6 && getAppHandValue() >=16 ) {
             return true;
         }
         return true;
@@ -272,28 +247,25 @@ public class PontoonGame {
 
     public boolean userCanStickOrTwist() {
         Hand userHand = this.userPlayer.getHand();
-        boolean canStickOrTwist = this.handValuer.canStickOrTwist(userHand);
-        return canStickOrTwist;
+        return this.handValuer.canStickOrTwist(userHand);
     }
 
     public String checkInitialDeal() {
 
         int appValue = getAppHandValue();
         int userValue = getUserHandValue();
-        boolean appPontoon = checkForAppPontoon();
-        boolean userPontoon = checkForUserPontoon();
 
         String resultBothPontoon = "You both have Pontoon. \nDealer wins this hand.";
         String resultAppPontoon = "You have " + userValue + ". \nDealer has Pontoon. \nDealer wins this hand.";
         String resultUserPontoon = "You have Pontoon. \nDealer has " + appValue + ". \nYou win this hand!";
 
-        if ( appPontoon && userPontoon ) {
+        if ( checkForAppPontoon() && checkForUserPontoon() ) {
             return resultBothPontoon;
         }
-        if ( appPontoon ) {
+        if ( checkForAppPontoon() ) {
             return resultAppPontoon;
         }
-        if ( userPontoon ) {
+        if ( checkForUserPontoon() ) {
             return resultUserPontoon;
         }
         return null;
@@ -323,7 +295,7 @@ public class PontoonGame {
 
     public String checkAppHand() {
 
-        String haveToTwist = "Since their hand is worth less than 15, Dealer must twist...";
+        String haveToTwist = "Dealer twists...";
         String resultAppBust = "Dealer is bust! \nYou win this hand.";
         String outcomeAppFCT = "Dealer has a Five Card Trick.";
         String outcomeTwist = "Dealer twists...";
@@ -351,8 +323,6 @@ public class PontoonGame {
 
         int appValue = getAppHandValue();
         int userValue = getUserHandValue();
-        boolean appFCT = checkForAppFCT();
-        boolean userFCT = checkForUserFCT();
 
         String resultBothFCT = "You both have a Five Card Trick. \nDealer wins this hand.";
         String resultAppFCT = "You have " + userValue + ". \nDealer has a Five Card Trick. \nDealer wins this hand.";
@@ -361,22 +331,22 @@ public class PontoonGame {
         String resultAppHigher = "You have " + userValue + ". \nDealer has " + appValue + ". \nDealer wins this hand.";
         String resultUserHigher = "You have " + userValue + ". \nDealer has " + appValue + ". \nYou win this hand!";
 
-        if ( appFCT && userFCT ) {
+        if ( checkForAppFCT() && checkForUserFCT() ) {
             return resultBothFCT;
         }
-        if ( appFCT ) {
+        if ( checkForAppFCT() ) {
             return resultAppFCT;
         }
-        if ( userFCT ) {
+        if ( checkForUserFCT() ) {
             return resultUserFCT;
         }
-        if ( appValue == userValue ) {
+        if ( getAppHandValue() == getUserHandValue() ) {
             return resultEqualValues;
         }
-        if ( appValue > userValue ) {
+        if ( getAppHandValue() > getUserHandValue() ) {
             return resultAppHigher;
         }
-        if ( appValue < userValue ) {
+        if ( getAppHandValue() < getUserHandValue() ) {
             return resultUserHigher;
         }
         return null;
