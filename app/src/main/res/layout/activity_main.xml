@@ -3,10 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <Button
             android:id="@+id/rules_button"
             android:text="Rules"
@@ -32,7 +28,5 @@
             android:layout_marginLeft="25dp"
             android:layout_below="@+id/rules_button"
             style="@style/Widget.AppCompat.Button" />
-
-    </ScrollView>
 
 </RelativeLayout>
