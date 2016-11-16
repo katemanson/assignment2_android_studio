@@ -23,11 +23,8 @@ public class Results extends AppCompatActivity {
 
         mResults = (TextView) findViewById(R.id.results);
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
-        String results = extras.getString("results");
-        mResults.setText(results);
+        String savedResults = SavedResultsPreferences.getSavedResults(this);
+        mResults.setText(savedResults);
 
     }
 

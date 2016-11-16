@@ -1,5 +1,6 @@
 package com.example.user.pontoon;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,6 +106,8 @@ public class Pontoon extends AppCompatActivity {
 
                 mNewHandButton.setVisibility(View.GONE);
                 mQuitButton.setVisibility(View.GONE);
+
+                //ToDo: ?use Preferences to provide hands won counters?
                 recreate();
             }
         });
@@ -116,9 +119,10 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Quit button clicked");
 
-                String results = mPontoonGame.getResultsText();
-                Intent intent = new Intent(Pontoon.this, Results.class);
-                intent.putExtra("results", results);
+                mNewHandButton.setVisibility(View.GONE);
+                mQuitButton.setVisibility(View.GONE);
+
+                Intent intent = new Intent(Pontoon.this, Main.class);
                 startActivity(intent);
             }
         });
