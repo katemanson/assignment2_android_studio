@@ -297,6 +297,7 @@ public class PontoonGame {
             return haveToTwist;
         }
         if ( checkIfUserBust() ) {
+            appWinCount++;
             return resultUserBust;
         }
         if ( checkForUserFCT() ) {
@@ -320,6 +321,7 @@ public class PontoonGame {
             return haveToTwist;
         }
         else if ( checkIfAppBust() ) {
+            userWinCount++;
             return resultAppBust;
         }
         else if ( checkForAppFCT() ) {
@@ -377,17 +379,17 @@ public class PontoonGame {
 
         String appWinSingPlural;
         if ( getAppWinCount() == 1 ) {
-            appWinSingPlural = " win";
+            appWinSingPlural = " hand";
         }
-        else appWinSingPlural = " wins";
+        else appWinSingPlural = " hands";
 
         String userWinSingPlural;
         if ( getUserWinCount() == 1 ) {
-            userWinSingPlural = " win";
+            userWinSingPlural = " hand";
         }
-        else userWinSingPlural = " wins";
+        else userWinSingPlural = " hands";
 
-        return "Dealer had: " + getAppWinCount() + appWinSingPlural + "\nYou had: " + getUserWinCount() + userWinSingPlural;
+        return "Dealer won: " + getAppWinCount() + appWinSingPlural + "\nYou won: " + getUserWinCount() + userWinSingPlural;
     }
 
 }

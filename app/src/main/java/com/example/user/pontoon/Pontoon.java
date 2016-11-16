@@ -116,9 +116,9 @@ public class Pontoon extends AppCompatActivity {
 
                 Log.d("Pontoon", "Quit button clicked");
 
-                mNewHandButton.setVisibility(View.GONE);
-                mQuitButton.setVisibility(View.GONE);
+                String results = mPontoonGame.getResultsText();
                 Intent intent = new Intent(Pontoon.this, Results.class);
+                intent.putExtra("results", results);
                 startActivity(intent);
             }
         });

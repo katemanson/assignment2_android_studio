@@ -1,5 +1,6 @@
 package com.example.user.pontoon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,6 +22,13 @@ public class Results extends AppCompatActivity {
         setContentView(R.layout.activity_results);
 
         mResults = (TextView) findViewById(R.id.results);
-}
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+
+        String results = extras.getString("results");
+        mResults.setText(results);
+
+    }
 
 }
