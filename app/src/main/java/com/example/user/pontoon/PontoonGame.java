@@ -251,7 +251,7 @@ public class PontoonGame {
         if ( getAppHandSize() >= 5 ) {
             return true;
         }
-        if ( getAppHandSize() < 5 && userTwistValue <= 6 && getAppHandValue() >=16 ) {
+        if ( getAppHandSize() < 5 && userTwistValue <= 6 && getAppHandValue() >16 ) {
             return true;
         }
         return true;
