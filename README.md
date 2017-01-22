@@ -50,16 +50,16 @@ Getting the app (as ‘dealer’) to strategise based on the user’s play. The 
 ```
 
 ##Next steps
-###Must...
+###Must
 * Debug to avoid app crashing on the rules button click
 * Use card images rather than text
 
-###Should...
+###Should
 * Refine dealer strategy
 * Follow Pontoon rules more completely, e.g. switch dealer after a non-dealer has had Pontoon
 * Log hands and save results
 
-###Could...
+###Could
 * Include instruction or strategy screens (or toasts)
 * Introduce betting and the option to 'buy' cards
 * Make it multiplayer
