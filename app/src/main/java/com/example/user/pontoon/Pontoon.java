@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -21,8 +22,10 @@ import java.util.TimerTask;
 public class Pontoon extends AppCompatActivity {
 
     Button mDealButton;
-    TextView mAppCards;
-    TextView mUserCards;
+    TextView mAppHead;
+    TextView mUserHead;
+    ImageView mAppCards;
+    ImageView mUserCards;
     TextView mOutcome;
     Button mNewHandButton;
     Button mQuitButton;
@@ -41,8 +44,8 @@ public class Pontoon extends AppCompatActivity {
         setContentView(R.layout.activity_pontoon);
 
         mDealButton = (Button) findViewById(R.id.deal_button);
-        mAppCards = (TextView) findViewById(R.id.app_cards);
-        mUserCards = (TextView) findViewById(R.id.user_cards);
+        mAppHead = (TextView) findViewById(R.id.app_cards);
+        mUserHead = (TextView) findViewById(R.id.user_cards);
         mOutcome = (TextView) findViewById(R.id.outcome_text);
         mNewHandButton = (Button) findViewById(R.id.new_hand_button);
         mQuitButton = (Button) findViewById(R.id.quit_button);
@@ -70,8 +73,8 @@ public class Pontoon extends AppCompatActivity {
                 mPontoonGame.setUpNewDeck();
                 mPontoonGame.deal(2);
 
-                mAppCards.setText(mPontoonGame.hideAppCards());
-                mUserCards.setText(mPontoonGame.showUserCards());
+                mAppHead.setText(mPontoonGame.hideAppCards());
+                mUserHead.setText(mPontoonGame.showUserCards());
 
                 if (mPontoonGame.checkInitialDeal() != null) {
 
@@ -85,7 +88,7 @@ public class Pontoon extends AppCompatActivity {
                     delayHandler.postDelayed( new Runnable() {
                         @Override
                         public void run() {
-                            mAppCards.setText(mPontoonGame.showAppCards());
+                            mAppHead.setText(mPontoonGame.showAppCards());
                             mNewHandButton.setVisibility(View.VISIBLE);
                             mQuitButton.setVisibility(View.VISIBLE);
                         }
@@ -137,8 +140,8 @@ public class Pontoon extends AppCompatActivity {
                 mOutcome.setVisibility(View.INVISIBLE);
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
-                mAppCards.setText(mPontoonGame.hideAppCards());
-                mUserCards.setText(mPontoonGame.showUserTwists());
+                mAppHead.setText(mPontoonGame.hideAppCards());
+                mUserHead.setText(mPontoonGame.showUserTwists());
 
                 delayHandler.postDelayed(new Runnable() {
                     @Override
@@ -160,7 +163,7 @@ public class Pontoon extends AppCompatActivity {
                 mStickButton.setVisibility(View.GONE);
                 mTwistButton.setVisibility(View.GONE);
                 mPontoonGame.userTwist();
-                mUserCards.setText(mPontoonGame.showUserCards());
+                mUserHead.setText(mPontoonGame.showUserCards());
                 userPlay();
             }
         });
@@ -188,13 +191,13 @@ public class Pontoon extends AppCompatActivity {
             }
             else if ( mPontoonGame.checkIfUserBust() ) {
 
-                mAppCards.setText(mPontoonGame.showAppCards());
+                mAppHead.setText(mPontoonGame.showAppCards());
                 mNewHandButton.setVisibility(View.VISIBLE);
                 mQuitButton.setVisibility(View.VISIBLE);
             }
             else if ( mPontoonGame.checkForUserFCT() ) {
 
-                mUserCards.setText(mPontoonGame.showUserTwists());
+                mUserHead.setText(mPontoonGame.showUserTwists());
 
                 delayHandler.postDelayed( new Runnable() {
                     @Override
@@ -222,7 +225,7 @@ public class Pontoon extends AppCompatActivity {
                     @Override
                     public void run() {
                         mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppTwists());
+                        mAppHead.setText(mPontoonGame.showAppTwists());
                     }
                 }, 2000 );
 
@@ -240,8 +243,8 @@ public class Pontoon extends AppCompatActivity {
                 delayHandler.postDelayed( new Runnable() {
                     @Override
                     public void run() {
-                        mAppCards.setText(mPontoonGame.showAppCards());
-                        mUserCards.setText(mPontoonGame.showUserCards());
+                        mAppHead.setText(mPontoonGame.showAppCards());
+                        mUserHead.setText(mPontoonGame.showUserCards());
                     }
                 }, 2000 );
 
@@ -260,8 +263,8 @@ public class Pontoon extends AppCompatActivity {
                 delayHandler.postDelayed( new Runnable() {
                     @Override
                     public void run() {
-                        mAppCards.setText(mPontoonGame.showAppCards());
-                        mUserCards.setText(mPontoonGame.showUserCards());
+                        mAppHead.setText(mPontoonGame.showAppCards());
+                        mUserHead.setText(mPontoonGame.showUserCards());
                     }
                 }, 2000 );
 
@@ -283,7 +286,7 @@ public class Pontoon extends AppCompatActivity {
                     @Override
                     public void run() {
                         mPontoonGame.appTwist();
-                        mAppCards.setText(mPontoonGame.showAppTwists());
+                        mAppHead.setText(mPontoonGame.showAppTwists());
                     }
                 }, 2000 );
 
@@ -304,8 +307,8 @@ public class Pontoon extends AppCompatActivity {
                 delayHandler.postDelayed( new Runnable() {
                     @Override
                     public void run() {
-                        mAppCards.setText(mPontoonGame.showAppCards());
-                        mUserCards.setText(mPontoonGame.showUserCards());
+                        mAppHead.setText(mPontoonGame.showAppCards());
+                        mUserHead.setText(mPontoonGame.showUserCards());
                     }
                 }, 2000 );
 
