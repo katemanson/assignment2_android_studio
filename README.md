@@ -68,3 +68,8 @@ Getting the app (as ‘dealer’) to strategise based on the user’s play. The 
 * Provide options to play by different sets of rules (lots of different versions of Pontoon)
 * Provide theoretical (? or perhaps better to be experimental?) probabilities, to help with decision making
 
+##Planning
+
+![class diagram](https://github.com/katemanson/Pontoon/raw/master/img/class_diagram.png)
+![Android setup](https://github.com/katemanson/Pontoon/raw/master/img/android_setup.png)
+
